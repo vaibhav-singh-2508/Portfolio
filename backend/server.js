@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://admin:1234@ac-ap7djnp-shard-00-00.v25dnmq.mongodb.net:27017,ac-ap7djnp-shard-00-01.v25dnmq.mongodb.net:27017,ac-ap7djnp-shard-00-02.v25dnmq.mongodb.net:27017/?ssl=true&replicaSet=atlas-owpen5-shard-0&authSource=admin&appName=Cluster0");
+mongoose.connect("");
 
 const Contact = mongoose.model(
   "Contact",
