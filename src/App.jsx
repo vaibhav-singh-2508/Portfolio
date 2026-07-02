@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
 
 const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Experience", "Contact"];
 
