@@ -3,29 +3,50 @@ import { useState, useEffect, useRef } from "react";
 const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Experience", "Contact"];
 
 const SKILLS = [
-  { name: "ASP.NET Core MVC", level: 70, cat: "Frontend" },
-  { name: "BOOTSTRAP", level: 90, cat: "Frontend" },
-  { name: "React.js", level: 60, cat: "Frontend" },
-  { name: "JavaScript", level: 60, cat: "Frontend" },
-  { name: "HTML/CSS", level: 96, cat: "Frontend" },
+  // Frontend
+  { name: "HTML5 / CSS3", level: 95, cat: "Frontend" },
+  { name: "Bootstrap", level: 90, cat: "Frontend" },
+  { name: "JavaScript", level: 80, cat: "Frontend" },
+  { name: "React.js", level: 65, cat: "Frontend" },
+  { name: "jQuery / AJAX", level: 75, cat: "Frontend" },
+  // Backend
+  { name: "C#", level: 85, cat: "Backend" },
+  { name: "ASP.NET Core MVC", level: 85, cat: "Backend" },
+  { name: "ASP.NET Web API", level: 80, cat: "Backend" },
+  { name: "Entity Framework Core", level: 75, cat: "Backend" },
   { name: "PHP", level: 80, cat: "Backend" },
-  { name: "JAVA", level: 60, cat: "Backend" },
-  { name: "MySQL", level: 90, cat: "Backend" },
-  { name: "REST Web API", level: 70, cat: "Backend" },
-  { name: "Node.js", level: 50, cat: "Backend" },
-  { name: "MongoDB", level: 50, cat: "Backend" },
-  { name: "MYSQL", level: 80, cat: "Backend" },
-  { name: "PostgreSQL", level: 70, cat: "Backend" },
+  { name: "Python", level: 65, cat: "Backend" },
+  { name: "FastAPI", level: 60, cat: "Backend" },
+  { name: "Java", level: 55, cat: "Backend" },
+  { name: "SQL Server", level: 80, cat: "Backend" },
+  { name: "MySQL", level: 85, cat: "Backend" },
+  // AI & ML
+  { name: "OpenAI Whisper", level: 70, cat: "AI/ML" },
+  { name: "IBM Granite (via Ollama)", level: 65, cat: "AI/ML" },
+  { name: "Prompt Engineering", level: 75, cat: "AI/ML" },
+  { name: "RAG / AI Agents", level: 60, cat: "AI/ML" },
+  // Tools
   { name: "Git & GitHub", level: 90, cat: "Tools" },
-  { name: "Visual Studio", level: 90, cat: "Tools" },
-  { name: "XAMPP", level: 90, cat: "Tools" },
-  { name: "SSMS", level: 70, cat: "Tools" },
+  { name: "Visual Studio 2022", level: 85, cat: "Tools" },
+  { name: "VS Code", level: 90, cat: "Tools" },
+  { name: "XAMPP", level: 85, cat: "Tools" },
+  { name: "SSMS", level: 75, cat: "Tools" },
+  { name: "IIS", level: 70, cat: "Tools" },
+  { name: "Postman", level: 75, cat: "Tools" },
 ];
 
 const PROJECTS = [
   {
+    title: "CaptainAI — AI Subtitle Intelligence Platform",
+    desc: "Full-stack AI subtitle platform (React, FastAPI, Python) built for the IBM AI Builders Challenge. Transcribes video/audio with Faster-Whisper, applies AI-driven grammar correction and content analysis via a self-hosted IBM Granite model (Ollama), and burns styled subtitles into video with FFmpeg. Features a stateless, session-based pipeline with real-time progress via Server-Sent Events and a live-preview subtitle editor, exporting MP4, SRT, and TXT.",
+    tags: ["REACT", "FASTAPI", "PYTHON", "WHISPER", "IBM GRANITE", "OLLAMA", "FFMPEG"],
+    color: "#7209b7",
+    year: "2026",
+    link: "https://github.com/vaibhav-singh-2508/CaptainAI",
+  },
+  {
     title: "Quiz Management System",
-    desc: "Designed and developed a full-stack Quiz Management System using PHP (PDO) and MySQL Implemented role-based authentication for admin and users Built features like quiz creation, question management, and timer-based attempts Developed an automated quiz evaluation and scoring system.",
+    desc: "Full-stack Quiz Management System using PHP (PDO) and MySQL with role-based authentication for admins and users. Built quiz creation, question management, and timer-based attempts, plus automated evaluation and scoring for 50–200 quiz records — eliminating manual grading.",
     tags: ["PHP", "HTML", "MYSQL", "JAVASCRIPT" , "BOOTSTRAP", "JQUERY"],
     color: "#00f5d4",
     year: "2024",
@@ -33,37 +54,21 @@ const PROJECTS = [
   },
   {
     title: "Expense Tracker System",
-    desc: "Developed a full-stack Expense Tracker using PHP and MySQL with category-based filtering, improving data tracking efficiency and user experience. Implemented income/expense tracking with category filtering Designed reporting module with date-wise and monthly summaries.",
-    tags: ["PHP-PDO", "HTML-CSS-BOOSTRAP", "JAVSCRIPT", "MYSQL" , "JQUERY", "CHART AND CANVAS"],
+    desc: "Full-stack Expense Tracker using PHP (PDO) and MySQL with category-based filtering, replacing manual spreadsheet budget tracking. Implemented income/expense tracking with category filters and a reporting module with date-wise and monthly summaries.",
+    tags: ["PHP-PDO", "HTML-CSS-BOOTSTRAP", "JAVASCRIPT", "MYSQL", "CHART.JS"],
     color: "#f72585",
     year: "2025",
-    link: "#",
+    link: "https://github.com/vaibhav-singh-2508/Expense-tracker",
   },
-  // {
-  //   title: "AuraUI Library",
-  //   desc: "Open-source React component library with 40+ accessible, themeable components and Storybook documentation.",
-  //   tags: ["React", "TypeScript", "Storybook", "Rollup"],
-  //   color: "#7209b7",
-  //   year: "2023",
-  //   link: "#",
-  // },
-  // {
-  //   title: "PulseMetrics",
-  //   desc: "Real-time analytics dashboard aggregating data from multiple APIs with custom chart visualizations.",
-  //   tags: ["React", "D3.js", "Express", "PostgreSQL"],
-  //   color: "#f8961e",
-  //   year: "2023",
-  //   link: "#",
-  // },
 ];
 
 const EXPERIENCE = [
   {
-    role: "Business Analyst Intern",
-    company: "Vrindi Ind Pvt Ltd",
-    period: "DEC 2025 – APRIL 2026",
-    desc: " Although hired as a Business Analyst, primarily worked on software development tasks and Contributed to development of RestaurantWave Flash Coupon Management System.",
-    tags: [" ASP.NET Core MVC", "C#", " Web API", "SQL Server" , "HTML" , "CSS", "BOOTSTRAP", "JAVASCRIPT" , "JQUERY", "IIS HOSTING" , " XML configuration" ,],
+    role: "Software Engineer Intern",
+    company: "Vrindi India Pvt Ltd",
+    period: "DEC 2025 – APR 2026",
+    desc: "Built an enterprise Coupon Management System end-to-end — from front-end checkout screens to REST APIs — in a 2-person Agile team, taking it from design through production deployment. Designed an XML-based business rule engine supporting 3 coupon types, cutting rule-update turnaround from a code deployment to a same-day config change. Implemented rule-based coupon validation across 8+ eligibility conditions using the Controller-Service-Repository pattern with log4net logging, reducing checkout discount errors reported by QA to near zero.",
+    tags: ["ASP.NET CORE MVC", "C#", "WEB API", "SQL SERVER", "HTML", "CSS", "BOOTSTRAP", "JAVASCRIPT", "AJAX", "LOG4NET", "XML CONFIG", "IIS HOSTING"],
   },
 ];
 
@@ -86,7 +91,7 @@ function SkillBar({ name, level, cat, delay }) {
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, []);
-  const catColors = { Frontend: "#00f5d4", Backend: "#f72585", Tools: "#7209b7" };
+  const catColors = { Frontend: "#00f5d4", Backend: "#f72585", "AI/ML": "#4cc9f0", Tools: "#7209b7" };
   return (
     <div ref={ref} style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
@@ -176,21 +181,21 @@ export default function App() {
         </h1>
         <p className="hero-role">
           <span className="role-prefix">{">"} </span>
-          Web Developer & Software Engineer
+          Full-Stack Developer & Software Engineer
         </p>
         <p className="hero-desc">
-          I craft high-performance digital experiences — merging code, creativity, and engineering discipline to build software that scales.
+          I build production web applications end-to-end — from ASP.NET Core & React front ends to REST APIs and AI-integrated tools — with a focus on clean architecture and shipping things that work.
         </p>
         <div className="hero-btns">
           <button className="btn-primary" onClick={() => scrollTo("Projects")}>VIEW PROJECTS</button>
           <button className="btn-ghost" onClick={() => scrollTo("Contact")}>GET IN TOUCH</button>
         </div>
         <div className="hero-stats">
-          {/* <div className="stat-item"><span className="stat-num">4+</span><span className="stat-label">Years Exp.</span></div>
-          <div className="stat-div" /> */}
-          <div className="stat-item"><span className="stat-num">30+</span><span className="stat-label">Projects</span></div>
+          <div className="stat-item"><span className="stat-num">4+</span><span className="stat-label">Projects Shipped</span></div>
           <div className="stat-div" />
-          {/* <div className="stat-item"><span className="stat-num">12+</span><span className="stat-label">Clients</span></div> */}
+          <div className="stat-item"><span className="stat-num">8.68</span><span className="stat-label">MCA CGPA</span></div>
+          <div className="stat-div" />
+          <div className="stat-item"><span className="stat-num">1</span><span className="stat-label">Internship</span></div>
         </div>
         <div className="scroll-indicator">
           <div className="scroll-line" />
@@ -205,16 +210,16 @@ export default function App() {
           <div className="about-text">
             <h2 className="section-title">Turning <span className="accent-cyan">Ideas</span> Into<br />Digital Reality</h2>
             <p className="about-para">
-              Hey! I'm Vaibhav — a web developer and software engineer based in India. I specialize in building end-to-end web applications, from sleek frontends to robust backend architectures.
+              Hey! I'm Vaibhav — a full-stack developer based in Navsari, India. I build end-to-end web applications across C#, ASP.NET Core, React, and PHP, and I'm increasingly drawn to weaving AI into practical tools.
             </p>
             <p className="about-para">
-              My approach blends engineering rigor with design sensibility. I care deeply about performance, accessibility, and maintainable code that teams actually enjoy working with.
+              During my internship at Vrindi India Pvt Ltd, I shipped a production coupon management system from front-end screens through REST APIs. On my own time, I built CaptainAI, an AI subtitle platform integrating Whisper and IBM Granite, for the IBM AI Builders Challenge.
             </p>
             <p className="about-para">
-              When not pushing pixels or optimizing queries, I'm exploring open-source projects, mentoring junior developers, and drinking way too much chai.
+              I hold an MCA from Sardar Patel University (8.68 CGPA) and I'm always exploring new tools — from AI agents to cloud technologies — while looking for a full-stack or software engineering role where I can keep building things that ship.
             </p>
             <div className="about-chips">
-              {["Problem Solver", "Performance Obsessed", "Team Player" , "Learner"].map(t => (
+              {["Full-Stack", "Problem Solver", "Team Player", "Fast Learner"].map(t => (
                 <span key={t} className="chip">{t}</span>
               ))}
             </div>
@@ -229,13 +234,13 @@ export default function App() {
               </div>
               <div className="terminal-body">
                 <p><span className="t-key">name</span><span className="t-colon">:</span> <span className="t-val">"Vaibhav Thakur"</span></p>
-                <p><span className="t-key">role</span><span className="t-colon">:</span> <span className="t-val">"Software Engineer"</span></p>
-                <p><span className="t-key">location</span><span className="t-colon">:</span> <span className="t-val">"India 🇮🇳"</span></p>
-                <p><span className="t-key">education</span><span className="t-colon">:</span> <span className="t-val">"MCA CS"</span></p>
-                <p><span className="t-key">experience</span><span className="t-colon">:</span> <span className="t-val">"Fresher"</span></p>
+                <p><span className="t-key">role</span><span className="t-colon">:</span> <span className="t-val">"Full-Stack Developer"</span></p>
+                <p><span className="t-key">location</span><span className="t-colon">:</span> <span className="t-val">"Navsari, India 🇮🇳"</span></p>
+                <p><span className="t-key">education</span><span className="t-colon">:</span> <span className="t-val">"MCA, Sardar Patel University"</span></p>
+                <p><span className="t-key">experience</span><span className="t-colon">:</span> <span className="t-val">"1 Internship"</span></p>
                 <p><span className="t-key">available</span><span className="t-colon">:</span> <span className="t-bool">true</span></p>
                 <p><span className="t-key">interests</span><span className="t-colon">:</span> [</p>
-                <p className="t-indent"><span className="t-val">"OSS"</span>, <span className="t-val">"AI"</span>,</p>
+                <p className="t-indent"><span className="t-val">"AI/ML"</span>, <span className="t-val">"Open Source"</span>,</p>
                 <p>]</p>
               </div>
             </div>
@@ -248,7 +253,7 @@ export default function App() {
         <div className="section-label">// 02. SKILLS</div>
         <h2 className="section-title">Tech <span className="accent-pink">Stack</span></h2>
         <div className="skill-filters">
-          {["All", "Frontend", "Backend", "Tools"].map(f => (
+          {["All", "Frontend", "Backend", "AI/ML", "Tools"].map(f => (
             <button key={f} className={`filter-btn ${skillFilter === f ? "active" : ""}`} onClick={() => setSkillFilter(f)}>
               {f}
             </button>
@@ -367,11 +372,15 @@ export default function App() {
           <div className="contact-info">
             <div className="contact-item">
               <span className="ci-label">EMAIL</span>
-              <a href="mailto:vaibhav@example.com" className="ci-value">thakurvaibhav6355@gmail.com</a>
+              <a href="mailto:thakurvaibhav6355@gmail.com" className="ci-value">thakurvaibhav6355@gmail.com</a>
+            </div>
+            <div className="contact-item">
+              <span className="ci-label">PHONE</span>
+              <a href="tel:+916355775951" className="ci-value">+91 6355775951</a>
             </div>
             <div className="contact-item">
               <span className="ci-label">LOCATION</span>
-              <span className="ci-value">India 🇮🇳</span>
+              <span className="ci-value">Navsari, Gujarat, India 🇮🇳</span>
             </div>
             <div className="contact-item">
               <span className="ci-label">AVAILABILITY</span>
@@ -380,7 +389,7 @@ export default function App() {
             <div className="social-links">
               {[
                 { name: "GitHub", icon: "GH", url: "https://github.com/vaibhav-singh-2508" },
-                { name: "LinkedIn", icon: "LI", url: "https://linkedin.com/in/vaibhav-singh-312508k" },
+                { name: "LinkedIn", icon: "LI", url: "https://linkedin.com/in/vaibhavthakur01" },
               ].map(s => (
                 <a key={s.name} href={s.url} className="social-btn" aria-label={s.name}>
                   <span>{s.icon}</span>
